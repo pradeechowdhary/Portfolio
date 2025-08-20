@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   
   // DISABLED: Word cycling is now handled by word-cycle.js
-  // const roles = ['Shan Irshad', 'A Developer', 'A Designer', 'A Cloud Dev', 'A Builder'];
+  // const roles = ['Pradeep Ponnam', 'A Developer', 'A Researcher', 'A JAVA Dev', 'A Builder'];
   // const wordDisplayDuration = 3000; // Display each word for 3 seconds
   // const wordTransitionDuration = 800; // ms for fade in/out animation (matches CSS)
   
@@ -126,8 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
   
-  // DISABLED: Loading sequence is now handled by simple-animation.js
-  // initializeLoadingSequence();
+ 
   
   // Loading sequence function (DISABLED)
   function initializeLoadingSequence() {
@@ -143,8 +142,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     if (scrollIndicator) scrollIndicator.style.opacity = '0';
     
-    // Start the loading screen animation
-    // animateLoadingScreen(); // DISABLED
+
   }
   
   // Handle loading screen animation (DISABLED - now handled by simple-animation.js)
@@ -154,37 +152,6 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('animateLoadingScreen in new-script.js is disabled');
     return;
     
-    // The code below is kept for reference but will not execute
-    /*
-    // Show loading screen immediately
-    loadingScreen.style.display = 'flex';
-    loadingScreen.style.opacity = '1';
-    
-    // Get terminal elements
-    const etherealTerminal = document.querySelector('.ethereal-terminal');
-    const etherealWelcome = document.querySelector('.ethereal-welcome');
-    const terminalLines = document.querySelectorAll('.terminal-line');
-    const commandLines = document.querySelectorAll('.terminal-line .command');
-    const outputLines = document.querySelectorAll('.terminal-line.output');
-    const cursorLine = document.querySelector('.terminal-line.cursor-line');
-    
-    // Hide all command and output lines initially
-    terminalLines.forEach(line => {
-      if (!line.classList.contains('cursor-line')) {
-        line.style.opacity = '0';
-        line.style.display = 'none';
-      }
-    });
-    
-    // Terminal animation sequence
-    let currentLineIndex = 0;
-    const totalCommandLines = commandLines.length;
-    
-    // Animation functions are loaded from fixed-animation.js
-    
-    // Start the terminal animation
-    startTerminalAnimation();
-    */
   }
   
   // Add mouse movement shimmer effect
@@ -202,81 +169,6 @@ document.addEventListener('DOMContentLoaded', () => {
   adjustFontSize();
   window.addEventListener('resize', adjustFontSize);
   
-  // DISABLED: Word cycling is now handled by word-cycle.js
-/*
-function cycleWords() {
-  // Simple, reliable word cycling function
-  let currentIndex = 0;
-  
-  // Get the changing word element
-  const changingWord = document.getElementById('changing-word');
-  if (!changingWord) return;
-  
-  // Make sure we start with Shan Irshad
-  changingWord.textContent = roles[0];
-  changingWord.style.opacity = '1';
-  changingWord.style.visibility = 'visible';
-  
-  // Apply gradient effect
-  changingWord.style.background = 'linear-gradient(90deg, #8b5cf6, #ec4899, #facc15)';
-  changingWord.style.backgroundSize = '200% auto';
-  changingWord.style.backgroundClip = 'text';
-  changingWord.style.webkitBackgroundClip = 'text';
-  changingWord.style.webkitTextFillColor = 'transparent';
-  
-  // Gradient variations for each word
-  const gradients = [
-    'linear-gradient(90deg, #8b5cf6, #ec4899, #facc15)', // Purple to pink to yellow
-    'linear-gradient(90deg, #3b82f6, #10b981, #8b5cf6)', // Blue to green to purple
-    'linear-gradient(90deg, #f97316, #ec4899, #3b82f6)', // Orange to pink to blue
-    'linear-gradient(90deg, #10b981, #facc15, #f97316)', // Green to yellow to orange
-    'linear-gradient(90deg, #ec4899, #8b5cf6, #10b981)'  // Pink to purple to green
-  ];
-  
-  // Function to apply gradient to text
-  function applyGradient(index) {
-    changingWord.style.background = gradients[index % gradients.length];
-    changingWord.style.backgroundSize = '200% auto';
-    changingWord.style.backgroundClip = 'text';
-    changingWord.style.webkitBackgroundClip = 'text';
-    changingWord.style.webkitTextFillColor = 'transparent';
-  }
-  
-  // Function to cycle through words with smooth transitions
-  function rotateText() {
-    // Smooth fade out
-    changingWord.style.opacity = '0';
-    changingWord.style.transform = 'translateY(-8px)';
-    changingWord.style.transition = 'opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)';
-    
-    setTimeout(() => {
-      // Get next word
-      currentIndex = (currentIndex + 1) % roles.length;
-      
-      // Update text content
-      changingWord.textContent = roles[currentIndex];
-      
-      // Apply new gradient
-      applyGradient(currentIndex);
-      
-      // Set up entrance position
-      changingWord.style.transform = 'translateY(8px)';
-      
-      // Trigger entrance animation
-      setTimeout(() => {
-        changingWord.style.opacity = '1';
-        changingWord.style.transform = 'translateY(0)';
-      }, 20);
-    }, 400);
-  }
-  
-  // Start the rotation after a longer initial display (4 seconds for Shan Irshad)
-  setTimeout(() => {
-    // Then cycle at normal speed
-    setInterval(rotateText, wordDisplayDuration);
-  }, 4000);
-}
-*/ 
   
   // Create particles for background effect
   function createParticles() {
