@@ -13,28 +13,29 @@ except Exception:
     docx = None
 
 from sentence_transformers import SentenceTransformer
-import httpx  # REST call to Groq
+import httpx
 
-# Resolve project root as the folder one level above /app/
+# Directory setup
 ROOT_DIR = Path(__file__).resolve().parents[1]
 DATA_DIR = ROOT_DIR / "data"
 INDEX_PATH = DATA_DIR / "index.faiss"
 META_PATH = DATA_DIR / "chunks.json"
 
 _SYS_PROMPT = """You are Pradeep Ponnam’s résumé assistant.
-Answer ONLY using the provided résumé context. If info is missing, say you do not have it.
-Format:
-- Use concise bullet points.
-- End with a short "References:" list citing 1–3 brief snippets.
-Never speculate or invent details.
-"""
+
+Rules:
+- Answer ONLY with facts found in the provided résumé context.
+- If the info is not in context, say: “I don’t have that in the resume.”
+- Be concise and clear; use short bullets for lists.
+- Include a “References” section ONLY when you actually cite 1–2 short snippets from the context.
+- Do NOT include “References” for greetings, small talk, or generic guidance.
+- Never invent citations or quotes. Keep quotes very short (≤12 words)."""
 
 def ensure_data_dir() -> str:
     DATA_DIR.mkdir(parents=True, exist_ok=True)
     return str(DATA_DIR)
 
-# ---------- Text extraction ----------
-
+# Text extraction helpers
 def _read_pdf(path: str) -> str:
     reader = PdfReader(path)
     text = []
@@ -75,8 +76,7 @@ def chunk_text(text: str, max_words: int = 180, overlap: int = 40) -> List[str]:
         i = max(0, j - overlap)
     return [c for c in chunks if c.strip()]
 
-# ---------- Embeddings (cached) ----------
-
+# Embedding with caching
 _embedder_instance: SentenceTransformer | None = None
 
 def _embedder() -> SentenceTransformer:
@@ -86,7 +86,7 @@ def _embedder() -> SentenceTransformer:
     return _embedder_instance
 
 def warm_embedder() -> None:
-    _ = _embedder()  # preload weights at startup
+    _ = _embedder()
 
 def _embed(texts: List[str]) -> np.ndarray:
     model = _embedder()
@@ -95,11 +95,9 @@ def _embed(texts: List[str]) -> np.ndarray:
 
 def _build_faiss(vectors: np.ndarray) -> faiss.IndexFlatIP:
     d = vectors.shape[1]
-    index = faiss.IndexFlatIP(d)  # cosine (since normalized)
+    index = faiss.IndexFlatIP(d)
     index.add(vectors)
     return index
-
-# ---------- RAG Engine ----------
 
 class RAGEngine:
     def __init__(self, index, chunks: List[str]):
@@ -142,7 +140,6 @@ class RAGEngine:
         D, I = self.index.search(qvec, k)
         return [(int(i), float(s)) for i, s in zip(I[0].tolist(), D[0].tolist()) if i != -1]
 
-    # ---- Groq REST call ----
     def _groq_chat(self, *, prompt: str, model_name: str, api_key: str, temperature: float = 0.2) -> str:
         if not api_key:
             raise RuntimeError("Missing GROQ_API_KEY")
@@ -172,18 +169,22 @@ class RAGEngine:
         selected = [self.text_chunks[i] for i, _ in pairs]
         context = "\n\n".join(f"- {c}" for c in selected) if selected else "- (no relevant snippets found)"
         refs = [{"chunk": i, "score": s, "preview": self.text_chunks[i][:160]} for i, s in pairs]
-
-        prompt = f"""{_SYS_PROMPT}
-
-[RESUME CONTEXT]
+        prompt = f"""
+[CONTEXT]
 {context}
 
-[USER QUESTION]
+[QUESTION]
 {question}
 
-[RESPONSE INSTRUCTIONS]
-- If the answer isn't in context, say: "I don't have that in the resume."
-- Otherwise, answer directly and include a brief "References" list with short quoted snippets.
+[STYLE]
+- If this is a greeting/small talk (e.g., “hi”, “hello”), reply briefly:
+  “Hi — I’m Pradeep’s AI assistant. Ask about his skills, projects, roles, education, ISRO work, Spring Boot, Cloud, or ML.”
+  Do NOT include References.
+- If you answer from the context, keep it crisp and end with:
+  References:
+  - "short quote 1"
+  - "short quote 2"
+- If nothing relevant is in CONTEXT, say: “I don’t have that in the resume.”
 """
         content = self._groq_chat(prompt=prompt, model_name=model_name, api_key=api_key, temperature=0.2)
         return content, refs

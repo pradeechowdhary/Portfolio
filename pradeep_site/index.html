@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        // Force light mode on initial load
+        localStorage.setItem('theme', 'light');
+        document.documentElement.setAttribute('data-theme', 'light');
+    </script>
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <title>Pradeep Ponnam - Portfolio</title>
+    <!-- Mobile Chrome-Optimized Favicon Configuration -->
+    <!-- Root favicons with multiple formats for maximum compatibility -->
+    <link rel="icon" href="favicon.ico">
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="icon" href="favicon.png">
+    
+    <!-- Chrome Mobile specific - high priority -->
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="favicon.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="favicon.png">
+    
+    <!-- Android Chrome specific with explicit sizes -->
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="favicon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="favicon.png">
+    
+    <!-- iOS/iPadOS Icons - Critical for mobile Safari -->
+    <link rel="apple-touch-icon" href="favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="favicon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon.png">
+    
+    <!-- Microsoft/Windows Icons -->
+    <meta name="msapplication-TileImage" content="favicon.png">
+    <meta name="msapplication-TileColor" content="#000000">
+    
+    <!-- Chrome mobile theme color -->
+    <meta name="theme-color" content="#000000" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+    
+    <!-- Web App Manifest for PWA support -->
+    <link rel="manifest" href="site.webmanifest">
+    <meta name="theme-color" content="#000000">
+    <meta name="theme-color" content="#000000">
+    <link rel="stylesheet" href="css/new-style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <!-- System font override for terminal animation -->
+    <link rel="stylesheet" href="css/system-font-fix.css">
+    <link rel="stylesheet" href="css/certifications.css">
+    <link rel="stylesheet" href="css/bullet-list.css">
+    <!-- Google Fonts - Scale AI inspired theme -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500,400&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" integrity="sha512-fD9DI5bZwQxOi7MhYWnnNPlvXdp/2Pj3XSTRrFs5FQa4mizyGLnJcN6tuvUS6LbmgN1ut+XGSABKvjN0H6Aoow==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+    <!-- Loading Screen - Clean Version Without Terminal -->
+    <div id="loading-screen" class="loading-screen">
+        <!-- Simple loading indicator or just empty for immediate transition -->
+        <div class="loading-content">
+            <!-- Optional: Add a simple loading spinner or logo here if needed -->
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar sticky-nav">
+        <div class="navbar-container">
+            <div class="site-logo">
+                <a href="#hero" class="site-name">pradeepponnam.com</a>
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+                    <i class="fas fa-moon moon-icon"></i>
+                    <i class="fas fa-sun sun-icon"></i>
+                </button>
+            </div>
+            <div class="navbar-links">
+                <a href="#about" class="navbar-link">About Me</a>
+                <a href="#experience" class="navbar-link">Experience</a>
+                <a href="#achievements" class="navbar-link">Achievements</a>
+                <a href="#projects" class="navbar-link">Projects</a>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+        <!-- Background Layers -->
+        <div class="depth-layer"></div>
+        <div class="nebula-overlay"></div>
+        <div id="particles" class="particles-container"></div>
+        
+        <!-- Main Content -->
+        <div class="content">
+            <div class="intro-sequence">
+                <div class="intro-text">
+                    <h1 class="hero-text">
+                        <div class="greeting-line">
+                            <span class="static-text hi">Hi,</span> <span class="static-text im">I'm</span>
+                        </div>
+                        <div class="word-carousel-container">
+                            <span class="word-carousel">
+                                <span id="changing-word" class="gradient-text shimmer-effect">Pradeep Ponnam</span>
+                            </span>
+                        </div>
+                    </h1>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Scroll Indicator -->
+        <div id="scroll-indicator" class="scroll-indicator subtle-indicator">
+            <div class="scroll-arrow"></div>
+            <span class="scroll-text">Scroll</span>
+        </div>
+    </section>
+
+    <!-- About Me Section -->
+    <section id="about" class="modern-section about-section">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-left-column reveal-element" data-delay="100">
+                    <div class="profile-image-wrapper">
+                        <img src="images/pradeep.jpg" alt="Pradeep Ponnam" class="profile-image" width="300" height="300" loading="eager">
+                    </div>
+                    <div class="about-content">
+                        <div class="about-text">
+                            <p class="intro-paragraph">
+                                Hi, I'm <span class="gradient-text highlight-text">Pradeep Ponnam</span> — a 4.0‑GPA Master’s student in Information Technology at the University of Memphis and a technical builder focused on AI‑native, cloud‑first platforms—combining deep learning, generative AI, and microservice architectures to turn complex, ambiguous problems into reliable, high‑performance systems.
+                            </p>
+                            <p class="secondary-paragraph">
+                                I’m doubling down on LLM applications, cloud‑native scale, and applied AI that ships—production‑grade RAG, resilient backends, and ML systems that drive real‑world decisions.
+                            </p>
+                            <p class="secondary-paragraph">
+                                Outside of research and engineering, I enjoy exploring emerging AI papers, building prototypes, and sharing knowledge with the community.
+                            </p>
+                        </div>
+                        
+                        <div class="exploring-section">
+                            <h3 class="exploring-title">Currently Building Toward</h3>
+                            <div class="exploring-tags">
+                                <span class="exploring-tag">🤖 LLM Applications</span>
+                                <span class="exploring-tag">☁️ Cloud‑Native Scale</span>
+                                <span class="exploring-tag">🧠 Applied AI</span>
+                            </div>
+                        </div>
+                        
+                        <p class="ai-prompt">For anything else, feel free to ask my AI <span class="emoji">😉</span></p>
+                        
+                        <!-- Social Icons -->
+                        <div class="social-icons-container reveal-child" data-child-delay="800">
+                            <a href="https://www.linkedin.com/in/pradeep-ponnam/" target="_blank" class="social-icon" aria-label="LinkedIn">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="mailto:pradeepponnam@example.com" class="social-icon" aria-label="Email">
+                                <i class="far fa-envelope"></i>
+                            </a>
+                            <a href="tel:+1XXXXXXXXXX" class="social-icon" aria-label="Phone">
+                                <i class="fas fa-phone-alt"></i>
+                            </a>
+                            <a href="assets/PradeepCV.pdf" target="_blank" class="social-icon" aria-label="Resume">
+                                <i class="fas fa-file-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-right-column reveal-element" data-delay="300">
+                    <!-- AI Status Badge -->
+                    <div class="ai-status-badge">
+                        <span class="status-dot"></span>
+                        <span class="status-text">Pradeep.ai Online</span>
+                    </div>
+                    <div class="ai-chat-container">
+                        <div class="chat-header">
+                            <h3 class="chat-title">🤖 Chat with Pradeep's AI</h3>
+                            <p class="chat-subtitle">Ask anything about my work or what I'm building</p>
+                        </div>
+                        <div id="chat-messages" class="chat-messages">
+                            <!-- Messages will be added here by JavaScript -->
+                        </div>
+                        <div class="chat-input-container">
+                            <input type="text" id="chat-input" class="chat-input" placeholder="Ask me anything...">
+                            <button id="send-button" class="send-button">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="modern-section experience-section">
+        <div class="container">
+            <h2 class="section-subtitle text-center">Experience</h2>
+            
+            <div class="experience-cards">
+                <!-- Research Assistant -->
+                <div class="experience-card reveal-element" data-delay="100">
+                    <div class="experience-card-content">
+                        <div class="company-logo-wrapper">
+                            <div class="company-logo-container">
+                                <img src="images/uofm.png" alt="University of Memphis logo" class="company-logo">
+                            </div>
+                        </div>
+                        <div class="experience-details">
+                            <div class="experience-header">
+                                <h3 class="experience-title"><span class="gradient-role">Research Assistant</span></h3>
+                                <p class="experience-company">@ University of Memphis</p>
+                                <p class="experience-date">2025–Present</p>
+                            </div>
+                            <p class="experience-paragraph">
+                                I architected and shipped a GPT‑4 + FastAPI chatbot for navigating U.S.&nbsp;AI regulations, integrating BERT‑based retrieval for legal text matching, grounded citations and a guided onboarding flow. I containerized the stack with Docker, instrumented tracing and structured logs for observability, and piloted with academic and enterprise users to iterate on accuracy, latency and trust.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <!-- ISRO Research Intern -->
+                <div class="experience-card reveal-element" data-delay="200">
+                    <div class="experience-card-content">
+                        <div class="company-logo-wrapper">
+                            <div class="company-logo-container">
+                                <img src="images/isro-logo.png" alt="ISRO logo" class="company-logo">
+                            </div>
+                        </div>
+                        <div class="experience-details">
+                            <div class="experience-header">
+                                <h3 class="experience-title"><span class="gradient-role">Research Intern</span></h3>
+                                <p class="experience-company">@ ISRO</p>
+                                <p class="experience-date">2024</p>
+                            </div>
+                            <p class="experience-paragraph">
+                                I engineered a deep‑learning prototype to detect ships and oil spills in SAR imagery, building GPU‑accelerated training pipelines with reproducible data loaders, augmentation and TensorBoard tracking. I authored integration proposals for coastal surveillance workflows focusing on deployment feasibility, alert thresholds and false‑positive mitigation.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Software Engineer Intern -->
+                <div class="experience-card reveal-element" data-delay="300">
+                    <div class="experience-card-content">
+                        <div class="company-logo-wrapper">
+                            <div class="company-logo-container">
+                                <img src="images/stag.png" alt="BlackBuck logo" class="company-logo">
+                            </div>
+                        </div>
+                        <div class="experience-details">
+                            <div class="experience-header">
+                                <h3 class="experience-title"><span class="gradient-role">Software Engineer Intern</span></h3>
+                                <p class="experience-company">@ BlackBuck</p>
+                                <p class="experience-date">2023</p>
+                            </div>
+                            <p class="experience-paragraph">
+                                I designed a Kafka‑based microservice architecture for logistics and built production REST APIs serving 1,000+ active users. I automated deployments with Docker on AWS and introduced health checks, retries and load testing to harden services under peak traffic.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Java Backend Intern -->
+                <div class="experience-card reveal-element" data-delay="400">
+                    <div class="experience-card-content">
+                        <div class="company-logo-wrapper">
+                            <div class="company-logo-container">
+                                <img src="images/slashmark.png" alt="Slash Mark logo" class="company-logo">
+                            </div>
+                        </div>
+                        <div class="experience-details">
+                            <div class="experience-header">
+                                <h3 class="experience-title"><span class="gradient-role">Java Backend Intern</span></h3>
+                                <p class="experience-company">@ Slash Mark</p>
+                                <p class="experience-date">2022</p>
+                            </div>
+                            <p class="experience-paragraph">
+                                I developed Spring&nbsp;Boot + MySQL REST services with secure JWT authentication, optimized queries and pagination for stable data access patterns and set up CI/CD to ship microservices predictably.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Achievements Section -->
+    <section id="achievements" class="modern-section certifications-section">
+        <div class="container">
+            <h2 class="section-subtitle text-center">Achievements</h2>
+            
+            <div class="certifications-container">
+                <!-- Top Performer -->
+                <div class="certification-card reveal-element" data-delay="100">
+                    <div class="certification-badge-container">
+                        <img src="images/isro-logo.png" alt="Top 1% Performer Badge" class="certification-badge">
+                        <div class="certification-hover-info">
+                            <h4>Top&nbsp;1% Performer</h4>
+                            <p>ISRO Research Cohort</p>
+                            <span class="certification-date">2024</span>
+                        </div>
+                    </div>
+                    <div class="certification-details">
+                        <h3 class="certification-title"><span class="gradient-role">Top&nbsp;1% Performer</span> – ISRO Research Cohort</h3>
+                        <p class="certification-description">Recognized among the top 1% of researchers in the 2024 ISRO cohort for impactful work on SAR imagery analysis and coastal surveillance.</p>
+                    </div>
+                </div>
+                
+                <!-- Dean's List -->
+                <div class="certification-card reveal-element" data-delay="200">
+                    <div class="certification-badge-container">
+                        <img src="images/uofm.png" alt="Dean's List Badge" class="certification-badge">
+                        <div class="certification-hover-info">
+                            <h4>Dean’s List</h4>
+                            <p>University of Memphis</p>
+                            <span class="certification-date">2024–2025</span>
+                        </div>
+                    </div>
+                    <div class="certification-details">
+                        <h3 class="certification-title"><span class="gradient-role">Dean’s List</span> – University of Memphis</h3>
+                        <p class="certification-description">Honored on the Dean’s List at the University of Memphis for academic excellence in 2024 and 2025.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="modern-section projects-section">
+        <div class="container">
+            <h2 class="section-subtitle text-center">Projects & Achievements</h2>
+            <ul class="experience-description-list">
+                <li>AI Regulation Chatbot – built a FastAPI + GPT‑4 assistant to navigate U.S.&nbsp;AI regulations with BERT‑driven retrieval and grounded citations.</li>
+                <li>Enterprise Document Processor – developed a modular pipeline for document ingestion, OCR/embedding, retrieval and auditable Q&A.</li>
+                <li>Drone Vision Detection – prototyped aerial perception workflows for SAR imagery with reproducible training pipelines and deployment‑friendly preprocessing.</li>
+                <li>Top&nbsp;1% Performer in the ISRO Research Cohort (2024) and Dean’s List at the University of Memphis (2024–2025).</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Removed simple-animation.js because it could hide sections when JS fails -->
+    <script src="js/page-init.js"></script>
+    <script src="js/word-cycle.js"></script>
+    <script src="js/smooth-scroll.js"></script>
+    <script src="js/sticky-nav.js"></script>
+    <script src="js/active-nav.js"></script>
+    <!-- Custom chat script for Pradeep -->
+    <script src="js/pradeep-chat.js"></script>
+    <script src="js/theme-toggle.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const loading = document.getElementById('loading-screen');
+            if (loading) loading.style.display = 'none';
+          });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        // Force light mode on initial load
+        localStorage.setItem('theme', 'light');
+        document.documentElement.setAttribute('data-theme', 'light');
+    </script>
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <title>Shan Irshad - Portfolio</title>
+    <!-- Mobile Chrome-Optimized Favicon Configuration -->
+    <!-- Root favicons with multiple formats for maximum compatibility -->
+    <link rel="icon" href="favicon.ico">
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="icon" href="favicon.png">
+    
+    <!-- Chrome Mobile specific - high priority -->
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="favicon.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="favicon.png">
+    
+    <!-- Android Chrome specific with explicit sizes -->
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="favicon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="favicon.png">
+    
+    <!-- iOS/iPadOS Icons - Critical for mobile Safari -->
+    <link rel="apple-touch-icon" href="favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="favicon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon.png">
+    
+    <!-- Microsoft/Windows Icons -->
+    <meta name="msapplication-TileImage" content="favicon.png">
+    <meta name="msapplication-TileColor" content="#000000">
+    
+    <!-- Chrome mobile theme color -->
+    <meta name="theme-color" content="#000000" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+    
+    <!-- Web App Manifest for PWA support -->
+    <link rel="manifest" href="site.webmanifest">
+    <meta name="theme-color" content="#000000">
+    <meta name="theme-color" content="#000000">
+    <link rel="stylesheet" href="css/new-style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <!-- System font override for terminal animation -->
+    <link rel="stylesheet" href="css/system-font-fix.css">
+    <link rel="stylesheet" href="css/certifications.css">
+    <link rel="stylesheet" href="css/bullet-list.css">
+    <!-- Google Fonts - Scale AI inspired theme -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500,400&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" integrity="sha512-fD9DI5bZwQxOi7MhYWnnNPlvXdp/2Pj3XSTRrFs5FQa4mizyGLnJcN6tuvUS6LbmgN1ut+XGSABKvjN0H6Aoow==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+    <!-- Loading Screen - Clean Version Without Terminal -->
+    <div id="loading-screen" class="loading-screen">
+        <!-- Simple loading indicator or just empty for immediate transition -->
+        <div class="loading-content">
+            <!-- Optional: Add a simple loading spinner or logo here if needed -->
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar sticky-nav">
+        <div class="navbar-container">
+            <div class="site-logo">
+                <a href="#hero" class="site-name">shanirshad.com</a>
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+                    <i class="fas fa-moon moon-icon"></i>
+                    <i class="fas fa-sun sun-icon"></i>
+                </button>
+            </div>
+            <div class="navbar-links">
+                <a href="#about" class="navbar-link">About Me</a>
+                <a href="#experience" class="navbar-link">Experience</a>
+                <a href="#certifications" class="navbar-link">Certifications</a>
+                <a class='navbar-link' href='/ghosted' onclick='window.location.href=\'ghosted.html\'; return false;'>Ghosted</a>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+        <!-- Background Layers -->
+        <div class="depth-layer"></div>
+        <div class="nebula-overlay"></div>
+        <div id="particles" class="particles-container"></div>
+        
+        <!-- Theme Toggle Button was moved to navbar -->
+        
+        <!-- Main Content -->
+        <div class="content">
+            <div class="intro-sequence">
+                <div class="intro-text">
+                    <h1 class="hero-text">
+                        <div class="greeting-line">
+                            <span class="static-text hi">Hi,</span> <span class="static-text im">I'm</span>
+                        </div>
+                        <div class="word-carousel-container">
+                            <span class="word-carousel">
+                                <span id="changing-word" class="gradient-text shimmer-effect">Shan Irshad</span>
+                            </span>
+                        </div>
+                    </h1>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Scroll Indicator -->
+        <div id="scroll-indicator" class="scroll-indicator subtle-indicator">
+            <div class="scroll-arrow"></div>
+            <span class="scroll-text">Scroll</span>
+        </div>
+    </section>
+
+    <!-- About Me Section -->
+    <section id="about" class="modern-section about-section">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-left-column reveal-element" data-delay="100">
+                    <div class="profile-image-wrapper">
+                        <img src="images/profile-pic.jpg" alt="Shan Irshad" class="profile-image" width="300" height="300" loading="eager">
+                    </div>
+                    <div class="about-content">
+                        <div class="about-text">
+                            <p class="intro-paragraph">
+                                Hi, I'm <span class="gradient-text highlight-text">Shan Irshad</span> — a Computer Information Systems student at the University of Texas at Dallas going into my senior year. I'm a technical builder and system architect focused on crafting AI-native, cloud-powered solutions that solve complex engineering problems through scalable design, robust implementation, and strategic technical decisions.
+                            </p>
+                            <p class="secondary-paragraph">
+                                As a <span class="gradient-text highlight-text">Cloud Architect</span>, <span class="gradient-text highlight-text">AI Engineer</span>, and <span class="gradient-text highlight-text">Technical Product Manager</span>, I blend deep engineering expertise with product intuition to transform complex systems into powerful, scalable platforms. My flagship project, Ghosted, showcases this approach as a cloud automation platform that uses natural language and turns it into cloud deployments.
+                            </p>
+                            <p class="secondary-paragraph">
+                                When I'm not architecting systems, you'll find me cheering on Liverpool FC and staying active working out.
+                            </p>
+                        </div>
+                        
+                        <div class="exploring-section">
+                            <h3 class="exploring-title">Currently Building Toward</h3>
+                            <div class="exploring-tags">
+                                <span class="exploring-tag">🧠 AI</span>
+                                <span class="exploring-tag">⚙️ AI-Powered Cloud Automation</span>
+                                <span class="exploring-tag">📱 Product Roadmapping</span>
+                            </div>
+                        </div>
+                        
+                        <p class="ai-prompt">For anything else, feel free to ask my AI <span class="emoji">😉</span></p>
+                        
+                        <!-- Social Icons -->
+                        <div class="social-icons-container reveal-child" data-child-delay="800">
+                            <a href="https://www.linkedin.com/in/shan-irshad/" target="_blank" class="social-icon" aria-label="LinkedIn">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="mailto:shanirshad8@gmail.com" class="social-icon" aria-label="Email">
+                                <i class="far fa-envelope"></i>
+                            </a>
+                            <a href="tel:+14695449186" class="social-icon" aria-label="Phone">
+                                <i class="fas fa-phone-alt"></i>
+                            </a>
+                            <a href="assets/resume.pdf" target="_blank" class="social-icon" aria-label="Resume">
+                                <i class="fas fa-file-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-right-column reveal-element" data-delay="300">
+                    <!-- AI Status Badge -->
+                    <div class="ai-status-badge">
+                        <span class="status-dot"></span>
+                        <span class="status-text">Shan.ai Online</span>
+                    </div>
+                    <div class="ai-chat-container">
+                        <div class="chat-header">
+                            <h3 class="chat-title">🤖 Chat with Shan's AI</h3>
+                            <p class="chat-subtitle">Ask anything about my work or what I'm building</p>
+                        </div>
+                        <div id="chat-messages" class="chat-messages">
+                            <!-- Messages will be added here by JavaScript -->
+                        </div>
+                        <div class="chat-input-container">
+                            <input type="text" id="chat-input" class="chat-input" placeholder="Ask me anything...">
+                            <button id="send-button" class="send-button">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="modern-section experience-section">
+        <div class="container">
+            <h2 class="section-subtitle text-center">Experience</h2>
+            
+            <div class="experience-cards">
+                <!-- Mastercard Experience Card -->
+                <div class="experience-card reveal-element" data-delay="100">
+                    <div class="experience-card-content">
+                        <div class="company-logo-wrapper">
+                            <div class="company-logo-container">
+                                <img src="https://shanirshad.com/images/mastercard-logo.png" alt="Mastercard logo" class="company-logo">
+                            </div>
+                        </div>
+                        <div class="experience-details">
+                            <div class="experience-header">
+                                <h3 class="experience-title"><span class="gradient-role">Site Reliability Engineer Intern</span></h3>
+                                <p class="experience-company">@ Mastercard</p>
+                                <p class="experience-date">Summer 2025</p>
+                            </div>
+                            <p class="experience-paragraph">
+                                During my internship at Mastercard, I developed an AI-powered incident management tool using Python and LLMs that automated data ingestion from Splunk and Remedy APIs, reducing mean time to triage by 40%. I also engineered ML detection algorithms to analyze over 100,000 log events, which improved anomaly detection accuracy by 25% while automating cloud infrastructure provisioning using Terraform and Jenkins CI/CD pipelines to accelerate deployment cycles by 40%.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Nutrify AI Experience Card -->
+                <div class="experience-card reveal-element" data-delay="200">
+                    <div class="experience-card-content">
+                        <div class="company-logo-wrapper">
+                            <div class="company-logo-container">
+                                <img src="https://shanirshad.com/images/nutrify-logo.jpeg" alt="Nutrify AI logo" class="company-logo">
+                            </div>
+                        </div>
+                        <div class="experience-details">
+                            <div class="experience-header">
+                                <h3 class="experience-title"><span class="gradient-role">Technical Product Manager</span></h3>
+                                <p class="experience-company">@ Nutrify AI</p>
+                                <p class="experience-date">Spring 2025</p>
+                            </div>
+                            <p class="experience-paragraph">
+                                At Nutrify AI, I led the technical architecture for an AI-powered nutrition app with an ML recommendation engine, building and deploying a conversational AI chatbot using FastAPI and OpenAI API integration. Through user validation with 15 interviews and 100+ surveys, the chatbot resulted in a 25% increase in app downloads. I optimized performance and implemented ML personalization features that improved user engagement by 45% and overall user activity by 30%.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section id="certifications" class="modern-section certifications-section">
+        <div class="container">
+            <h2 class="section-subtitle text-center">Certifications</h2>
+            
+            <div class="certifications-container">
+                <!-- Azure Administrator Certification -->
+                <div class="certification-card reveal-element" data-delay="100">
+                    <div class="certification-badge-container">
+                        <img src="https://learn.microsoft.com/en-us/media/learn/certification/badges/microsoft-certified-associate-badge.svg" alt="Microsoft Azure Administrator Associate" class="certification-badge">
+                        <div class="certification-hover-info">
+                            <h4>Azure Administrator</h4>
+                            <p>Managing Azure resources & infrastructure</p>
+                            <span class="certification-date">February 2025</span>
+                        </div>
+                    </div>
+                    <div class="certification-details">
+                        <h3 class="certification-title">Microsoft <span class="gradient-role">Azure Administrator</span></h3>
+                        <p class="certification-description">Certified in implementing, managing, and monitoring identity, governance, storage, compute, and virtual networks in a cloud environment.</p>
+                        <a href="https://learn.microsoft.com/en-us/users/irshadshanmikael-1967/credentials/5f29ed6b13d6e248" target="_blank" class="certification-link"><i class="fas fa-external-link-alt"></i> View Certification</a>
+                    </div>
+                </div>
+                
+                <!-- Azure Fundamentals Certification -->
+                <div class="certification-card reveal-element" data-delay="200">
+                    <div class="certification-badge-container">
+                        <img src="https://learn.microsoft.com/en-us/media/learn/certification/badges/microsoft-certified-fundamentals-badge.svg" alt="Microsoft Azure Fundamentals" class="certification-badge">
+                        <div class="certification-hover-info">
+                            <h4>Azure Fundamentals</h4>
+                            <p>Cloud concepts & Azure basics</p>
+                            <span class="certification-date">July 2024</span>
+                        </div>
+                    </div>
+                    <div class="certification-details">
+                        <h3 class="certification-title">Microsoft <span class="gradient-role">Azure Fundamentals</span></h3>
+                        <p class="certification-description">Certified in cloud concepts, Azure services, Azure workloads, security and privacy in Azure, and Azure pricing and support.</p>
+                        <a href="https://learn.microsoft.com/en-us/users/irshadshanmikael-1967/credentials/492a6cf91ff5ff73" target="_blank" class="certification-link"><i class="fas fa-external-link-alt"></i> View Certification</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    </div>
+
+    <script src="js/simple-animation.js"></script>
+    <script src="js/new-script.js"></script>
+    <script src="js/word-cycle.js"></script>
+    <script src="js/smooth-scroll.js"></script>
+    <script src="js/ghosted-forward-nav.js"></script>
+    <script src="js/sticky-nav.js"></script>
+    <script src="js/active-nav.js"></script>
+    <script src="js/about-section.js"></script>
+    <script src="js/theme-toggle.js"></script>
+</body>
+</html>

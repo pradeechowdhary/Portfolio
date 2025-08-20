@@ -1,0 +1,55 @@
+/* System font override for terminal animation ONLY */
+
+/* Apply system monospace font ONLY to terminal elements */
+#loading-screen .ethereal-terminal,
+#loading-screen .terminal-content,
+#loading-screen .line,
+#loading-screen .prompt,
+#loading-screen .command,
+#loading-screen .output,
+#loading-screen .cursor,
+#loading-screen .welcome-message,
+#loading-screen .money-sign,
+#loading-screen .welcome-text,
+#loading-screen .changing-word,
+#loading-screen .static-text {
+  font-family: "Courier New", Courier, monospace !important;
+}
+
+/* Hide welcome symbol initially to prevent it from showing before terminal */
+.ethereal-welcome,
+.welcome-symbol,
+.welcome-message {
+  visibility: hidden !important;
+  opacity: 0 !important;
+  display: none !important;
+}
+
+/* Ensure terminal is visible first */
+.ethereal-terminal {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Make the money sign more visible with system font */
+#loading-screen .money-sign {
+  font-weight: bold;
+  font-size: 2.5rem;
+}
+
+/* Pure CSS cursor instead of image-based cursor */
+#loading-screen .cursor {
+  display: inline-block;
+  width: 10px;
+  height: 18px;
+  background-color: #fff;
+  margin-left: 2px;
+  vertical-align: middle;
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
