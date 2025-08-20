@@ -22,10 +22,9 @@ document.addEventListener('DOMContentLoaded', function() {
   const words = [
     'Pradeep Ponnam',
     'An AI Engineer',
-    'A Cloud Architect',
     'A Researcher',
     'A Builder',
-    'A Microservice Developer'
+    'JAVA Developer'
   ];
   
   // Start with the second word to avoid repeating
