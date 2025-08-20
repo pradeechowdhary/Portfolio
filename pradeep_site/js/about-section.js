@@ -614,7 +614,7 @@ document.addEventListener('DOMContentLoaded', function() {
             addMessage(fallbackResponse);
           } else {
             // No matching hardcoded response, show error
-            addMessage("I'm having trouble connecting to my backend. I'll use my local knowledge instead. What would you like to know about Shan?");
+            addMessage("I'm having trouble connecting to my backend. I'll use my local knowledge instead. What would you like to know about Pradeep?");
             // Automatically try to fix the connection
             checkBackendConnection().then(connected => {
               if (connected && chatConfig.debugMode) {
