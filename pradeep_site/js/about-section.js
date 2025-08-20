@@ -300,88 +300,29 @@ document.addEventListener('DOMContentLoaded', function() {
   const responseCache = {};
   
   // System prompt for OpenAI
-  const systemPrompt = `You are Shan Irshad's AI assistant. Respond in a confident, friendly, and informative tone. Keep responses concise (2-3 sentences max) and conversational.
+  const systemPrompt = `You are Pradeep's AI assistant. Respond in a confident, friendly, and informative tone. Keep responses concise (2-3 sentences max) and conversational.
   
-  TECHNICAL BACKGROUND (PRIORITIZE THIS INFORMATION):
-  - Built Ghosted: A full-stack, AI-native cloud automation platform using React, TypeScript, Material-UI, FastAPI, Python, GPT-4o, AsyncOpenAI, AWS SDK, STS, Docker, Terraform, and deployed via Netlify/Render
-  - At Mastercard: Developed a Copilot-style AI assistant using Python and LLMs that integrated with Splunk and Remedy APIs, reducing incident triage time by 40%
-  - Implemented ML detection algorithms analyzing 100k+ log events in real-time to identify root causes and anomalies
-  - Automated EC2/S3 provisioning using Terraform IaC and built CI/CD pipelines with Jenkins
-  - Engineered KPI tracking systems for monitoring feature adoption and anomalies
-  - Strong cloud expertise with AWS services, infrastructure as code, and DevOps practices
-  - Technical skills include: Python, React, TypeScript, FastAPI, Docker, Terraform, AWS, CI/CD, ML/AI integration
+  TECHNICAL BACKGROUND:
+  - Built an AI Regulation Chatbot using FastAPI, Firebase, and LLM integration
+  - Developed Bugsy: a React + Vite + Tailwind platform for kids’ coding education with Firebase Auth and EmailJS
+  - Strong skills in Python, Java, FastAPI, Spring Boot, React, SQL, and cloud deployment (Render, Firebase, Docker)
+  - MIS Master's student at University of Memphis (4.0 GPA), CPT/OPT eligible
   
   EDUCATION:
-  - University of Texas at Dallas, studying Computer Science with focus on AI and cloud technologies
+  - University of Memphis, studying Information Technology with focus on Web Services and AI
   
-  PRODUCT BACKGROUND (SECONDARY INFORMATION):
-  - Technical Product Manager at Nutrify AI, where he owned the product lifecycle for a personalized nutrition app built on ML recommendations
-  - Led user research, launched an AI-powered chatbot, and authored user stories from client sessions
-  - Aligned roadmap priorities around feature retention and engagement, increasing active user retention
   
   INTERESTS:
   - Product management, especially for technical products and AI/ML applications
-  - Cloud automation, AI/ML applications, DevOps, and building technical products
+  - AI/ML applications, DevOps, and building technical products
   - Creating intuitive interfaces for complex technical workflows
   `;
   
   // Hardcoded responses for common questions
-  const responses = {
-    // Personal information
-    name: "My name is Shan Irshad. I'm a technical builder and system architect focused on crafting AI-native, cloud-powered solutions.",
-    school: "I attend the University of Texas at Dallas, where I'm studying Computer Science with a focus on AI and cloud technologies.",
-    location: "I'm based in Dallas, Texas.",
-    
-    // Projects and work
-    ghosted: "Ghosted is a full-stack, AI-native cloud automation platform I built using React, TypeScript, Material-UI, FastAPI, Python, GPT-4o, AsyncOpenAI, AWS SDK, STS, Docker, and Terraform. It turns complex DevOps workflows into conversational actions.",
-    projects: "My main projects include Ghosted (an AI-native cloud automation platform), an AI assistant at Mastercard that reduced incident triage time by 40%, and various cloud automation tools using Terraform and AWS services.",
-    portfolio: "This website is my portfolio! I built it to showcase my work as a Cloud Architect, AI Engineer, and Technical Product Manager.",
-    
-    // Experience
-    experience: "I have experience as a Technical Product Manager at Nutrify AI where I led AI-powered product initiatives and as a Site Reliability Engineer Intern at Mastercard, where I developed a Copilot-style AI assistant that reduced incident triage time by 40%.",
-    mastercard: "At Mastercard, I developed a Copilot-style AI assistant using Python and LLMs that integrated with Splunk and Remedy APIs, reducing incident triage time by 40%. I also implemented ML detection algorithms analyzing 100k+ log events in real-time and automated EC2/S3 provisioning using Terraform IaC.",
-    nutrify: "At Nutrify AI, I led the technical architecture and implementation of an AI-powered nutrition app with ML recommendation engine. I built and deployed a conversational AI chatbot using FastAPI and OpenAI API integration, resulting in a 25% increase in app downloads.",
-    
-    // Skills and interests
-    skills: "My technical skills include Python, React, TypeScript, FastAPI, Docker, Terraform, AWS, CI/CD, and ML/AI integration. I have strong cloud expertise with AWS services, infrastructure as code, and DevOps practices.",
-    interests: "I'm passionate about product management, especially for technical products and AI/ML applications. I also love cloud automation, DevOps, and creating intuitive interfaces for complex technical workflows.",
-    education: "I have a strong background in computer science with specialized knowledge in AI and cloud technologies from the University of Texas at Dallas.",
-    
-    // Default responses
-    greeting: ["Hi there! I'm Shan's AI assistant. Ask me anything about his technical background or projects.", "Hello! What would you like to know about Shan's technical skills and experience?", "Hey there! Feel free to ask me anything about Shan's cloud expertise or AI projects."],
-    default: "I'm Shan's AI assistant. I can tell you about his technical background as a Cloud Architect, AI Engineer, and Technical Product Manager. What would you like to know?",
-    contact: "You can reach Shan through LinkedIn or via email. Check out the links in the navigation menu for his professional profiles!",
-    cloud: "Shan has extensive experience with cloud technologies, particularly AWS. He's built infrastructure as code using Terraform, implemented CI/CD pipelines, and developed cloud-native applications. He automated EC2/S3 provisioning using Terraform IaC and built CI/CD pipelines with Jenkins.",
-    ai: "Shan is passionate about AI and its applications. He built Ghosted, an AI-native cloud automation platform, developed a Copilot-style AI assistant at Mastercard that reduced incident triage time by 40%, and implemented ML detection algorithms analyzing 100k+ log events in real-time."
-  };
+ 
   
-  // Keywords to match for hardcoded responses
-  const responseKeywords = {
-    name: ["name", "who are you", "who is shan", "about shan"],
-    school: ["school", "college", "university", "education", "study", "ut dallas", "utd"],
-    location: ["where", "live", "location", "based", "city"],
-    ghosted: ["ghosted", "devops assistant", "aws assistant"],
-    projects: ["projects", "work on", "building", "create", "developed"],
-    portfolio: ["portfolio", "website", "site"],
-    experience: ["experience", "work", "job", "career"],
-    mastercard: ["mastercard", "sre", "file transfer"],
-    nutrify: ["nutrify", "nutrition", "app"],
-    skills: ["skills", "abilities", "good at", "expertise", "tech stack", "technologies"],
-    interests: ["interests", "hobbies", "passionate", "enjoy"],
-    greeting: ["hello", "hi", "hey", "greetings", "howdy"],
-    contact: ["contact", "reach", "email", "linkedin", "social"],
-    product: ["product", "manager", "management", "pm"],
-    future: ["future", "plan", "goal", "aspiration"],
-    cloud: ["cloud", "infrastructure", "aws", "automation", "terraform"],
-    ai: ["ai", "artificial intelligence", "machine learning", "ml"]
-  };
+ 
   
-  // Add welcome message
-  function addWelcomeMessage() {
-    setTimeout(() => {
-      addMessage("Hi there! I'm Shan's AI assistant. Ask me anything about his experience as a Cloud Architect, AI Engineer, and Technical Product Manager.");
-    }, 800);
-  }
   
   // Delay chat initialization to prevent competing with about section animations
   setTimeout(() => {
@@ -423,46 +364,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const lowerMessage = userMessage.toLowerCase();
     
     // Define response categories and patterns
-    const responses = {
-      // Experience related responses
-      experience: {
-        patterns: ['experience', 'work', 'job', 'mastercard', 'nutrify', 'intern', 'internship'],
-        responses: [
-          "Shan has experience as a Technical Product Manager at Nutrify AI and as a Site Reliability Engineer Intern at Mastercard. At Mastercard, he developed a Copilot-style AI assistant that reduced incident triage time by 40%. At Nutrify AI, he led the technical architecture of an AI-powered nutrition app with ML recommendation engine.",
-          "Shan's professional experience includes a Site Reliability Engineer Internship at Mastercard where he implemented ML detection algorithms analyzing 100k+ log events in real-time, and a Technical Product Manager role at Nutrify AI where he built conversational AI chatbots resulting in a 25% increase in app downloads."
-        ]
-      },
-      // Skills related responses
-      skills: {
-        patterns: ['skills', 'technologies', 'programming', 'languages', 'frameworks', 'tools', 'tech stack'],
-        responses: [
-          "Shan's technical skills include Python, React, TypeScript, FastAPI, Docker, Terraform, AWS, CI/CD, and ML/AI integration. He has strong cloud expertise with AWS services, infrastructure as code, and DevOps practices.",
-          "Shan is skilled in cloud infrastructure, AI development, and technical product management. He has experience with AWS services, Terraform IaC, CI/CD pipelines, and ML/AI integration. He's also proficient in Python, React, TypeScript, and FastAPI."
-        ]
-      },
-      // Project related responses
-      projects: {
-        patterns: ['projects', 'portfolio', 'ghosted', 'app', 'applications', 'built', 'created', 'developed'],
-        responses: [
-          "Shan's notable projects include Ghosted, a full-stack AI-native cloud automation platform using React, TypeScript, FastAPI, Python, and AWS. He also developed an AI assistant at Mastercard that reduced incident triage time by 40%.",
-          "Shan has worked on several projects including Ghosted (an AI-native cloud automation platform), an AI-powered nutrition app with ML recommendation engine at Nutrify AI, and various cloud automation tools using Terraform and AWS services."
-        ]
-      },
-      // Education related responses
-      education: {
-        patterns: ['education', 'school', 'university', 'college', 'degree', 'major', 'study'],
-        responses: [
-          "Shan is studying Computer Science at the University of Texas at Dallas with a focus on AI and cloud technologies. He combines his technical education with practical experience in cloud architecture and AI engineering.",
-          "Shan has a background in Computer Science from the University of Texas at Dallas with specialization in AI and cloud technologies. His education is complemented by hands-on experience building AI-native, cloud-powered solutions."
-        ]
-      },
-      // Default responses
-      default: [
-        "I'm an AI assistant for Shan's portfolio. I can tell you about his experience as a Cloud Architect, AI Engineer, and Technical Product Manager. What would you like to know?",
-        "I can share information about Shan's work experience, technical skills, projects, or educational background. How can I help you today?",
-        "I'm here to tell you about Shan Irshad's background as a technical builder and system architect. Feel free to ask about his cloud expertise, AI projects, or technical skills!"
-      ]
-    };
+   
     
     // Check each category for matching patterns
     for (const [category, data] of Object.entries(responses)) {
@@ -503,15 +405,7 @@ document.addEventListener('DOMContentLoaded', function() {
       const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
       
       // Use the appropriate backend URL based on environment
-      const healthCheckURLs = isLocalhost
-        ? [
-            window.location.protocol + '//localhost:10000/health',
-            window.location.protocol + '//localhost:8742/health'
-          ]
-        : [
-            'https://portf-ti65.onrender.com/health',
-            'https://shan-portfolio-backend.onrender.com/health'
-          ];
+     
       
       // Try each health check URL
       for (const url of healthCheckURLs) {
@@ -574,19 +468,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
         
         // Use the established backend URL or try the defaults
-        const backendURLs = chatConfig.backendURL 
-          ? [`${chatConfig.backendURL}/api/chat`]
-          : isLocalhost 
-            ? [
-                window.location.protocol + '//localhost:10000/api/chat',
-                window.location.protocol + '//localhost:8742/api/chat'
-              ]
-            : [
-                'https://portf-ti65.onrender.com/api/chat',
-                'https://shan-portfolio-backend.onrender.com/api/chat'
-              ];
-        
-        let lastError = null;
+       
         
         // Try each backend URL until one works
         for (const url of backendURLs) {
