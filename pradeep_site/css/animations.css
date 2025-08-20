@@ -72,7 +72,7 @@
     <nav class="navbar sticky-nav">
         <div class="navbar-container">
             <div class="site-logo">
-                <a href="#hero" class="site-name">shanirshad.com</a>
+                <a href="#hero" class="site-name">PradeepPonnam.com</a>
                 <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
                     <i class="fas fa-moon moon-icon"></i>
                     <i class="fas fa-sun sun-icon"></i>
@@ -106,7 +106,7 @@
                         </div>
                         <div class="word-carousel-container">
                             <span class="word-carousel">
-                                <span id="changing-word" class="gradient-text shimmer-effect">Shan Irshad</span>
+                                <span id="changing-word" class="gradient-text shimmer-effect">Pradeep Ponnam</span>
                             </span>
                         </div>
                     </h1>
@@ -127,12 +127,12 @@
             <div class="about-grid">
                 <div class="about-left-column reveal-element" data-delay="100">
                     <div class="profile-image-wrapper">
-                        <img src="images/profile-pic.jpg" alt="Shan Irshad" class="profile-image" width="300" height="300" loading="eager">
+                        <img src="images/profile-pic.jpg" alt="Pradeep Ponnam" class="profile-image" width="300" height="300" loading="eager">
                     </div>
                     <div class="about-content">
                         <div class="about-text">
                             <p class="intro-paragraph">
-                                Hi, I'm <span class="gradient-text highlight-text">Shan Irshad</span> — a Computer Information Systems student at the University of Texas at Dallas going into my senior year. I'm a technical builder and system architect focused on crafting AI-native, cloud-powered solutions that solve complex engineering problems through scalable design, robust implementation, and strategic technical decisions.
+                                Hi, I'm <span class="gradient-text highlight-text">Pradeep Ponnam</span> — a Computer Information Systems student at the University of Texas at Dallas going into my senior year. I'm a technical builder and system architect focused on crafting AI-native, cloud-powered solutions that solve complex engineering problems through scalable design, robust implementation, and strategic technical decisions.
                             </p>
                             <p class="secondary-paragraph">
                                 As a <span class="gradient-text highlight-text">Cloud Architect</span>, <span class="gradient-text highlight-text">AI Engineer</span>, and <span class="gradient-text highlight-text">Technical Product Manager</span>, I blend deep engineering expertise with product intuition to transform complex systems into powerful, scalable platforms. My flagship project, Ghosted, showcases this approach as a cloud automation platform that uses natural language and turns it into cloud deployments.
@@ -155,10 +155,10 @@
                         
                         <!-- Social Icons -->
                         <div class="social-icons-container reveal-child" data-child-delay="800">
-                            <a href="https://www.linkedin.com/in/shan-irshad/" target="_blank" class="social-icon" aria-label="LinkedIn">
+                            <a href="https://www.linkedin.com/in/Pradeep-Ponnam/" target="_blank" class="social-icon" aria-label="LinkedIn">
                                 <i class="fab fa-linkedin-in"></i>
                             </a>
-                            <a href="mailto:shanirshad8@gmail.com" class="social-icon" aria-label="Email">
+                            <a href="mailto:PradeepPonnam8@gmail.com" class="social-icon" aria-label="Email">
                                 <i class="far fa-envelope"></i>
                             </a>
                             <a href="tel:+14695449186" class="social-icon" aria-label="Phone">
@@ -174,11 +174,11 @@
                     <!-- AI Status Badge -->
                     <div class="ai-status-badge">
                         <span class="status-dot"></span>
-                        <span class="status-text">Shan.ai Online</span>
+                        <span class="status-text">Pradeep.ai Online</span>
                     </div>
                     <div class="ai-chat-container">
                         <div class="chat-header">
-                            <h3 class="chat-title">🤖 Chat with Shan's AI</h3>
+                            <h3 class="chat-title">🤖 Chat with Pradeep's AI</h3>
                             <p class="chat-subtitle">Ask anything about my work or what I'm building</p>
                         </div>
                         <div id="chat-messages" class="chat-messages">
@@ -207,7 +207,7 @@
                     <div class="experience-card-content">
                         <div class="company-logo-wrapper">
                             <div class="company-logo-container">
-                                <img src="https://shanirshad.com/images/mastercard-logo.png" alt="Mastercard logo" class="company-logo">
+                                <img src="https://PradeepPonnam.com/images/mastercard-logo.png" alt="Mastercard logo" class="company-logo">
                             </div>
                         </div>
                         <div class="experience-details">
@@ -228,7 +228,7 @@
                     <div class="experience-card-content">
                         <div class="company-logo-wrapper">
                             <div class="company-logo-container">
-                                <img src="https://shanirshad.com/images/nutrify-logo.jpeg" alt="Nutrify AI logo" class="company-logo">
+                                <img src="https://PradeepPonnam.com/images/nutrify-logo.jpeg" alt="Nutrify AI logo" class="company-logo">
                             </div>
                         </div>
                         <div class="experience-details">
@@ -266,7 +266,7 @@
                     <div class="certification-details">
                         <h3 class="certification-title">Microsoft <span class="gradient-role">Azure Administrator</span></h3>
                         <p class="certification-description">Certified in implementing, managing, and monitoring identity, governance, storage, compute, and virtual networks in a cloud environment.</p>
-                        <a href="https://learn.microsoft.com/en-us/users/irshadshanmikael-1967/credentials/5f29ed6b13d6e248" target="_blank" class="certification-link"><i class="fas fa-external-link-alt"></i> View Certification</a>
+                        <a href="https://learn.microsoft.com/en-us/users/PonnamPradeepmikael-1967/credentials/5f29ed6b13d6e248" target="_blank" class="certification-link"><i class="fas fa-external-link-alt"></i> View Certification</a>
                     </div>
                 </div>
                 
@@ -283,7 +283,7 @@
                     <div class="certification-details">
                         <h3 class="certification-title">Microsoft <span class="gradient-role">Azure Fundamentals</span></h3>
                         <p class="certification-description">Certified in cloud concepts, Azure services, Azure workloads, security and privacy in Azure, and Azure pricing and support.</p>
-                        <a href="https://learn.microsoft.com/en-us/users/irshadshanmikael-1967/credentials/492a6cf91ff5ff73" target="_blank" class="certification-link"><i class="fas fa-external-link-alt"></i> View Certification</a>
+                        <a href="https://learn.microsoft.com/en-us/users/PonnamPradeepmikael-1967/credentials/492a6cf91ff5ff73" target="_blank" class="certification-link"><i class="fas fa-external-link-alt"></i> View Certification</a>
                     </div>
                 </div>
             </div>
