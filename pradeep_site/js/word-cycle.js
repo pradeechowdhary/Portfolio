@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
     'A Microservice Developer'
   ];
   
-  // Start with the second word to avoid repeating Shan Irshad
+  // Start with the second word to avoid repeating
   let currentIndex = 1;
   let cycleInterval = null;
   
