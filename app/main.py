@@ -1,5 +1,7 @@
 import os
 import uuid
+from .db import get_session, init_db
+from .models import Message
 from pathlib import Path
 from typing import Dict, List, Optional
 
@@ -58,6 +60,7 @@ def get_or_create_session(session_id: Optional[str]) -> str:
 
 @app.on_event("startup")
 def _startup():
+    init_db()
     ensure_data_dir()
     try:
         RAGEngine.load()
@@ -94,6 +97,10 @@ def chat(req: ChatRequest, request: Request):
     if not user_msg:
         return ChatResponse(reply="Ask me anything about Pradeep Ponnam’s résumé.", session_id=sid, references=[])
 
+    with get_session() as session:
+        session.add(Message(session_id=sid, role="user", content=user_msg))
+        session.commit()
+
     if _is_greeting(user_msg):
         greeting = ("Hi — I’m Pradeep’s AI assistant. "
                     "Ask about his skills, projects, roles, education, ISRO work, Spring Boot, Cloud, or ML.")
@@ -114,11 +121,23 @@ def chat(req: ChatRequest, request: Request):
 
     SESSIONS[sid].append({"role": "user", "content": user_msg})
     SESSIONS[sid].append({"role": "bot", "content": answer})
+
+    with get_session() as session:
+        session.add(Message(session_id=sid, role="bot", content=answer))
+        session.commit()
+
     return ChatResponse(reply=answer, session_id=sid, references=refs)
 
 class WSMessage(BaseModel):
     message: str
     session_id: Optional[str] = None
+
+@app.get("/logs")
+def get_logs(limit: int = 20):
+    with get_session() as session:
+        results = session.query(Message).order_by(Message.created_at.desc()).limit(limit).all()
+        return results
+
 
 @app.websocket("/ws")
 async def websocket_endpoint(ws: WebSocket):
@@ -129,21 +148,43 @@ async def websocket_endpoint(ws: WebSocket):
             msg = WSMessage(**data)
             sid = get_or_create_session(msg.session_id)
             text = (msg.message or "").strip()
+
             if not text:
                 await ws.send_json({"reply": "Ask about Pradeep’s résumé.", "session_id": sid})
                 continue
+
             if text.lower() == "clear history":
                 SESSIONS[sid] = []
                 await ws.send_json({"reply": "History cleared.", "session_id": sid})
                 continue
+
+            # --- NEW: log the user message to DB ---
+            try:
+                with get_session() as session:
+                    session.add(Message(session_id=sid, role="user", content=text))
+                    session.commit()
+            except Exception as e:
+                # Non-fatal: still continue responding
+                print(f"[ws] Failed to log user message: {e}")
+
             try:
                 rag = RAGEngine.load()
                 answer, refs = rag.answer(text, model_name=MODEL_NAME, api_key=GROQ_API_KEY)
             except Exception as e:
                 await ws.send_json({"reply": f"Error: {e}", "session_id": sid, "references": []})
                 continue
+
             SESSIONS[sid].append({"role": "user", "content": text})
             SESSIONS[sid].append({"role": "bot", "content": answer})
+
+            # --- NEW: log the bot reply to DB ---
+            try:
+                with get_session() as session:
+                    session.add(Message(session_id=sid, role="bot", content=answer))
+                    session.commit()
+            except Exception as e:
+                print(f"[ws] Failed to log bot message: {e}")
+
             await ws.send_json({"reply": answer, "session_id": sid, "references": refs})
     except WebSocketDisconnect:
         return
