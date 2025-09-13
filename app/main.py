@@ -88,21 +88,21 @@ def _startup():
 
 def _is_greeting(text: str) -> bool:
     t = "".join(ch for ch in text.lower() if ch.isalpha() or ch.isspace()).strip()
-    return t in {"hi","hello","hey","yo","hlo","hii","good morning","good afternoon","good evening"}
+    return t in {"hi","hello","hey","yo","hlo","hii","good morning","good afternoon","good evening","yup","h","a","."}
 
 @app.post("/chat", response_model=ChatResponse)
 def chat(req: ChatRequest, request: Request):
     sid = get_or_create_session(req.session_id)
     user_msg = (req.message or "").strip()
     if not user_msg:
-        return ChatResponse(reply="Ask me anything about Pradeep Ponnam’s résumé.", session_id=sid, references=[])
+        return ChatResponse(reply="Ask me anything about Pradeep...", session_id=sid, references=[])
 
     with get_session() as session:
         session.add(Message(session_id=sid, role="user", content=user_msg))
         session.commit()
 
     if _is_greeting(user_msg):
-        greeting = ("Hi — I’m Pradeep’s AI assistant. "
+        greeting = ("Hi, I’m Pradeep’s AI assistant. "
                     "Ask about his skills, projects, roles, education, ISRO work, Spring Boot, Cloud, or ML.")
         SESSIONS[sid].append({"role": "user", "content": user_msg})
         SESSIONS[sid].append({"role": "bot", "content": greeting})
