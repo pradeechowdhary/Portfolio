@@ -21,7 +21,7 @@ DATA_DIR = ROOT_DIR / "data"
 INDEX_PATH = DATA_DIR / "index.faiss"
 META_PATH = DATA_DIR / "chunks.json"
 
-_SYS_PROMPT = """You are Pradeep Ponnam’s résumé assistant.
+_SYS_PROMPT = """You are Pradeep's assistant.
 
 Rules:
 - Answer ONLY with facts found in the provided résumé context.
@@ -178,7 +178,7 @@ class RAGEngine:
 
 [STYLE]
 - If this is a greeting/small talk (e.g., “hi”, “hello”), reply briefly:
-  “Hi — I’m Pradeep’s AI assistant. Ask about his skills, projects, roles, education, ISRO work, Spring Boot, Cloud, or ML.”
+  “Hi, I’m Pradeep’s AI assistant. Ask about his skills, projects, roles, education, ISRO work, Spring Boot, Cloud, or ML.”
   Do NOT include References.
 - If you answer from the context, keep it crisp and end with:
   References:
