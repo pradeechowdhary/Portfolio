@@ -10,4 +10,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Curl to ping Render app
-        run: curl --silent https://pponnam-q3g6.onrender.com > /dev/null
+        run: curl --silent https://pponnam-b9e6.onrender.com > /dev/null
