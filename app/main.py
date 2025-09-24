@@ -1,11 +1,9 @@
 import os
 import uuid
-from .db import get_session, init_db
-from .models import Message
 from pathlib import Path
 from typing import Dict, List, Optional
 
-from fastapi import FastAPI, WebSocket, WebSocketDisconnect, Request, Response
+from fastapi import FastAPI, WebSocket, WebSocketDisconnect, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
@@ -17,7 +15,7 @@ from .rag_utils import RAGEngine, ensure_data_dir, warm_embedder
 load_dotenv()
 
 APP_NAME = os.getenv("APP_NAME", "Pradeep • Résumé Bot")
-MODEL_NAME = os.getenv("GROQ_MODEL", "llama-3.1-8b-instant")
+MODEL_NAME = os.getenv("GROQ_MODEL", "llama3-8b-8192")
 GROQ_API_KEY = os.getenv("GROQ_API_KEY", "")
 
 ROOT_DIR = Path(__file__).resolve().parents[1]
@@ -33,7 +31,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Mount /static only if folder exists (prevents crash)
+# Optional static files
 STATIC_DIR = ROOT_DIR / "static"
 if STATIC_DIR.exists():
     app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
@@ -60,7 +58,6 @@ def get_or_create_session(session_id: Optional[str]) -> str:
 
 @app.on_event("startup")
 def _startup():
-    init_db()
     ensure_data_dir()
     try:
         RAGEngine.load()
@@ -88,18 +85,15 @@ def _startup():
 
 def _is_greeting(text: str) -> bool:
     t = "".join(ch for ch in text.lower() if ch.isalpha() or ch.isspace()).strip()
-    return t in {"hi","hello","hey","yo","hlo","hii","good morning","good afternoon","good evening","yup","h","a","."}
+    return t in {"hi", "hello", "hey", "yo", "hlo", "hii", "good morning", "good afternoon", "good evening", "yup", "h", "a", "."}
 
 @app.post("/chat", response_model=ChatResponse)
 def chat(req: ChatRequest, request: Request):
     sid = get_or_create_session(req.session_id)
     user_msg = (req.message or "").strip()
+
     if not user_msg:
         return ChatResponse(reply="Ask me anything about Pradeep...", session_id=sid, references=[])
-
-    with get_session() as session:
-        session.add(Message(session_id=sid, role="user", content=user_msg))
-        session.commit()
 
     if _is_greeting(user_msg):
         greeting = ("Hi, I’m Pradeep’s AI assistant. "
@@ -116,28 +110,16 @@ def chat(req: ChatRequest, request: Request):
         rag = RAGEngine.load()
         answer, refs = rag.answer(user_msg, model_name=MODEL_NAME, api_key=GROQ_API_KEY)
     except Exception as e:
-        return ChatResponse(reply=f"Server error while answering (check FAISS/embeddings/Groq): {e}",
-                            session_id=sid, references=[])
+        return ChatResponse(reply=f"Server error while answering: {e}", session_id=sid, references=[])
 
     SESSIONS[sid].append({"role": "user", "content": user_msg})
     SESSIONS[sid].append({"role": "bot", "content": answer})
-
-    with get_session() as session:
-        session.add(Message(session_id=sid, role="bot", content=answer))
-        session.commit()
 
     return ChatResponse(reply=answer, session_id=sid, references=refs)
 
 class WSMessage(BaseModel):
     message: str
     session_id: Optional[str] = None
-
-@app.get("/logs")
-def get_logs(limit: int = 20):
-    with get_session() as session:
-        results = session.query(Message).order_by(Message.created_at.desc()).limit(limit).all()
-        return results
-
 
 @app.websocket("/ws")
 async def websocket_endpoint(ws: WebSocket):
@@ -158,15 +140,6 @@ async def websocket_endpoint(ws: WebSocket):
                 await ws.send_json({"reply": "History cleared.", "session_id": sid})
                 continue
 
-            # --- NEW: log the user message to DB ---
-            try:
-                with get_session() as session:
-                    session.add(Message(session_id=sid, role="user", content=text))
-                    session.commit()
-            except Exception as e:
-                # Non-fatal: still continue responding
-                print(f"[ws] Failed to log user message: {e}")
-
             try:
                 rag = RAGEngine.load()
                 answer, refs = rag.answer(text, model_name=MODEL_NAME, api_key=GROQ_API_KEY)
@@ -177,18 +150,10 @@ async def websocket_endpoint(ws: WebSocket):
             SESSIONS[sid].append({"role": "user", "content": text})
             SESSIONS[sid].append({"role": "bot", "content": answer})
 
-            # --- NEW: log the bot reply to DB ---
-            try:
-                with get_session() as session:
-                    session.add(Message(session_id=sid, role="bot", content=answer))
-                    session.commit()
-            except Exception as e:
-                print(f"[ws] Failed to log bot message: {e}")
-
             await ws.send_json({"reply": answer, "session_id": sid, "references": refs})
     except WebSocketDisconnect:
         return
 
-# Serve your portfolio at "/"
+# Serve portfolio site
 SITE_DIR = ROOT_DIR / "pradeep_site"
 app.mount("/", StaticFiles(directory=str(SITE_DIR), html=True), name="site")
