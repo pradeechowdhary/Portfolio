@@ -20,22 +20,24 @@ ROOT_DIR = Path(__file__).resolve().parents[1]
 DATA_DIR = ROOT_DIR / "data"
 INDEX_PATH = DATA_DIR / "index.faiss"
 META_PATH = DATA_DIR / "chunks.json"
+EXTRA_PATH = DATA_DIR / "extra_info.json"   # <- NEW
 
 _SYS_PROMPT = """You are Pradeep's assistant.
 
 Rules:
-- Answer ONLY with facts found in the provided résumé context.
+- Answer ONLY with facts found in the provided résumé context and supplemental info.
 - If the info is not in context, say: “I don’t have that in the resume.”
 - Be concise and clear; use short bullets for lists.
 - Include a “References” section ONLY when you actually cite 1–2 short snippets from the context.
 - Do NOT include “References” for greetings, small talk, or generic guidance.
-- Never invent citations or quotes. Keep quotes very short (≤12 words)."""
+- Never invent citations or quotes. Keep quotes very short (≤12 words).
+"""
 
 def ensure_data_dir() -> str:
     DATA_DIR.mkdir(parents=True, exist_ok=True)
     return str(DATA_DIR)
 
-# Text extraction helpers
+# -------- Text extraction helpers --------
 def _read_pdf(path: str) -> str:
     reader = PdfReader(path)
     text = []
@@ -76,7 +78,7 @@ def chunk_text(text: str, max_words: int = 180, overlap: int = 40) -> List[str]:
         i = max(0, j - overlap)
     return [c for c in chunks if c.strip()]
 
-# Embedding with caching
+# -------- Embedding with caching --------
 _embedder_instance: SentenceTransformer | None = None
 
 def _embedder() -> SentenceTransformer:
@@ -99,6 +101,7 @@ def _build_faiss(vectors: np.ndarray) -> faiss.IndexFlatIP:
     index.add(vectors)
     return index
 
+# -------- Main RAG Engine --------
 class RAGEngine:
     def __init__(self, index, chunks: List[str]):
         self.index = index
@@ -109,6 +112,13 @@ class RAGEngine:
         text = extract_text(path)
         text = clean_text(text)
         chunks = chunk_text(text)
+
+        # Load supplemental info if available
+        if EXTRA_PATH.exists():
+            with open(EXTRA_PATH, "r", encoding="utf-8") as f:
+                extra = json.load(f)
+            chunks.extend(extra.get("extra_info", []))
+
         vectors = _embed(chunks)
         index = _build_faiss(vectors)
         return cls(index=index, chunks=chunks)
@@ -126,7 +136,15 @@ class RAGEngine:
         index = faiss.read_index(str(INDEX_PATH))
         with open(META_PATH, "r", encoding="utf-8") as f:
             meta = json.load(f)
-        return cls(index=index, chunks=meta["chunks"])
+        chunks = meta["chunks"]
+
+        # Append supplemental info
+        if EXTRA_PATH.exists():
+            with open(EXTRA_PATH, "r", encoding="utf-8") as f:
+                extra = json.load(f)
+            chunks.extend(extra.get("extra_info", []))
+
+        return cls(index=index, chunks=chunks)
 
     @classmethod
     def load_or_none(cls):
@@ -177,8 +195,7 @@ class RAGEngine:
 {question}
 
 [STYLE]
-- If this is a greeting/small talk (e.g., “hi”, “hello”), reply briefly:
-  “Hi, I’m Pradeep’s AI assistant. Ask about his skills, projects, roles, education, ISRO work, Spring Boot, Cloud, or ML.”
+- If this is a greeting/small talk, reply briefly: “Hi, I’m Pradeep’s AI assistant. Ask about his skills, projects, roles, education, ISRO work, Spring Boot, Cloud, or ML.”
   Do NOT include References.
 - If you answer from the context, keep it crisp and end with:
   References:
